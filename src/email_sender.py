@@ -10,6 +10,7 @@ from email.mime.text import MIMEText
 from src.config import SMTPConfig
 
 logger = logging.getLogger(__name__)
+# Keep SMTP failures diagnosable without letting CI hang on dead connections.
 SMTP_TIMEOUT_SECONDS = 30
 SMTP_SSL_PORT = 465
 

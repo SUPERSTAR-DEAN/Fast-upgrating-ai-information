@@ -94,7 +94,7 @@ class EmailSenderTests(unittest.TestCase):
         self.assertIn("SMTP authentication failed", str(ctx.exception))
         self.assertIn("SMTP_USERNAME/SMTP_PASSWORD", str(ctx.exception))
 
-    def test_mask_email_handles_edge_cases(self):
+    def test_mask_email_masks_local_part_by_length(self):
         self.assertEqual(_mask_email("invalid"), "***")
         self.assertEqual(_mask_email("a@example.com"), "***@example.com")
         self.assertEqual(_mask_email("ab@example.com"), "a***@example.com")
