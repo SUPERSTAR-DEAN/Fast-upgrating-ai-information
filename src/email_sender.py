@@ -11,6 +11,7 @@ from src.config import SMTPConfig
 
 logger = logging.getLogger(__name__)
 SMTP_TIMEOUT_SECONDS = 30
+SMTP_SSL_PORT = 465
 
 
 def _preflight_dns(host: str) -> None:
@@ -47,7 +48,7 @@ def send_email(cfg: SMTPConfig, subject: str, text_body: str, html_body: str) ->
 
     _preflight_dns(cfg.host)
     tls_context = ssl.create_default_context()
-    tls_mode = "SMTP_SSL" if cfg.port == 465 else "STARTTLS"
+    tls_mode = "SMTP_SSL" if cfg.port == SMTP_SSL_PORT else "STARTTLS"
     logger.info(
         "Preparing SMTP delivery via %s:%s using %s (from=%s, to=%s)",
         cfg.host,
@@ -58,7 +59,7 @@ def send_email(cfg: SMTPConfig, subject: str, text_body: str, html_body: str) ->
     )
 
     try:
-        if cfg.port == 465:
+        if cfg.port == SMTP_SSL_PORT:
             with smtplib.SMTP_SSL(
                 cfg.host,
                 cfg.port,

@@ -4,7 +4,7 @@ from dataclasses import replace
 from unittest.mock import MagicMock, call, patch, sentinel
 
 from src.config import SMTPConfig
-from src.email_sender import send_email
+from src.email_sender import _mask_email, send_email
 
 
 class EmailSenderTests(unittest.TestCase):
@@ -93,6 +93,12 @@ class EmailSenderTests(unittest.TestCase):
         smtp_cls.assert_called_once_with(self.base_cfg.host, self.base_cfg.port, timeout=30)
         self.assertIn("SMTP authentication failed", str(ctx.exception))
         self.assertIn("SMTP_USERNAME/SMTP_PASSWORD", str(ctx.exception))
+
+    def test_mask_email_handles_edge_cases(self):
+        self.assertEqual(_mask_email("invalid"), "***")
+        self.assertEqual(_mask_email("a@example.com"), "***@example.com")
+        self.assertEqual(_mask_email("ab@example.com"), "a***@example.com")
+        self.assertEqual(_mask_email("alice@example.com"), "al***@example.com")
 
 
 if __name__ == "__main__":
