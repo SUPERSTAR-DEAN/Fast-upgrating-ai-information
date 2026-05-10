@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <body style="font-family: Arial, Helvetica, sans-serif; line-height: 1.55; color: #222;">
+    <h1 style="margin-bottom: 4px;">{{ subject }}</h1>
+    <p style="margin-top: 0; color: #666;">Generated at {{ generated_at }} UTC</p>
+
+    <h2>目录 / Table of Contents</h2>
+    <ul>
+      <li><a href="#news">每周 AI 时讯 / Weekly AI News</a></li>
+      <li><a href="#learn">深度学习/神经网络学习方向 / Learning Directions</a></li>
+      <li><a href="#failures">抓取失败来源 / Failed Sources</a></li>
+    </ul>
+
+    <h2 id="news">每周 AI 时讯（{{ start.strftime('%Y-%m-%d') }} ~ {{ end.strftime('%Y-%m-%d') }}）</h2>
+    {% if grouped %}
+      {% for category, category_items in grouped.items() %}
+        <h3>{{ category }} ({{ category_items|length }})</h3>
+        <ul>
+          {% for item in category_items %}
+            <li style="margin-bottom: 10px;">
+              <a href="{{ item.url }}"><strong>{{ item.title }}</strong></a><br/>
+              <span style="color: #555;">来源: {{ item.source_name }} | 时间: {{ item.published_at.strftime('%Y-%m-%d %H:%M UTC') if item.published_at else 'N/A' }}</span><br/>
+              <span>{{ item.summary }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endfor %}
+    {% else %}
+      <p>本周未抓取到有效内容，请检查来源配置或网络状态。</p>
+    {% endif %}
+
+    <h2 id="learn">本周主流深度学习与神经网络学习方向</h2>
+    {% for section in learning_directions %}
+      <h3>{{ section.title }}</h3>
+      <ul>
+        {% for bullet in section.bullets %}
+          <li>{{ bullet }}</li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+
+    <h2 id="failures">抓取失败来源</h2>
+    {% if failed_sources %}
+      <ul>
+        {% for source in failed_sources %}
+          <li>{{ source }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>无（全部来源抓取成功）</p>
+    {% endif %}
+  </body>
+</html>
