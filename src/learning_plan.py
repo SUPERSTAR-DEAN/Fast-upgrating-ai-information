@@ -1,14 +1,14 @@
 from __future__ import annotations
 
+from src.constants import AI_ML_KEYWORDS
 from src.models import LearningDirection, NewsItem
 
 
 def _pick_recommended_reads(items: list[NewsItem], limit: int = 8) -> list[str]:
     picks: list[str] = []
-    keywords = ["paper", "arxiv", "llm", "transformer", "diffusion", "agent", "rag", "benchmark", "pytorch"]
     for item in items:
         text = f"{item.title} {item.summary}".lower()
-        if any(k in text for k in keywords):
+        if any(k in text for k in AI_ML_KEYWORDS):
             picks.append(f"{item.title} ({item.source_name}) - {item.url}")
         if len(picks) >= limit:
             break

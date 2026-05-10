@@ -10,6 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 from dateutil import parser as dt_parser
 
+from src.constants import AI_ML_KEYWORDS
 from src.models import NewsItem
 from src.utils import clean_text, normalize_url
 
@@ -125,7 +126,7 @@ def collect_from_github_trending(source: dict[str, Any], timeout: int = 25) -> l
         tags = f"Language: {language}; Stars: {stars}"
 
         full_url = requests.compat.urljoin("https://github.com", href)
-        if not any(k in (repo_name + " " + description).lower() for k in ["ai", "ml", "llm", "diffusion", "transformer", "rag", "agent", "torch"]):
+        if not any(k in (repo_name + " " + description).lower() for k in AI_ML_KEYWORDS):
             continue
 
         items.append(

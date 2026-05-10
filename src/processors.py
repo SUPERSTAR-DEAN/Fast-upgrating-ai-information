@@ -22,7 +22,7 @@ def deduplicate_items(items: list[NewsItem]) -> list[NewsItem]:
     for item in sorted(items, key=lambda x: x.published_at or datetime(1970, 1, 1, tzinfo=timezone.utc), reverse=True):
         normalized = normalize_url(item.url)
         title_key = " ".join(item.title.lower().split())
-        signature = hashlib.sha1(f"{item.category}|{normalized}|{title_key}".encode("utf-8")).hexdigest()
+        signature = hashlib.sha256(f"{item.category}|{normalized}|{title_key}".encode("utf-8")).hexdigest()
         if signature in seen:
             continue
         seen.add(signature)
