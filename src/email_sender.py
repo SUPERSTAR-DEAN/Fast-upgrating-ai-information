@@ -25,6 +25,15 @@ def _preflight_dns(host: str) -> None:
         ) from exc
 
 
+def _mask_email(address: str) -> str:
+    local_part, separator, domain = address.partition("@")
+    if not separator:
+        return "***"
+    if len(local_part) <= 2:
+        return f"{local_part[0]}***@{domain}" if local_part else f"***@{domain}"
+    return f"{local_part[:2]}***@{domain}"
+
+
 def send_email(cfg: SMTPConfig, subject: str, text_body: str, html_body: str) -> None:
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
@@ -42,8 +51,8 @@ def send_email(cfg: SMTPConfig, subject: str, text_body: str, html_body: str) ->
         cfg.host,
         cfg.port,
         tls_mode,
-        cfg.email_from,
-        cfg.email_to,
+        _mask_email(cfg.email_from),
+        _mask_email(cfg.email_to),
     )
 
     try:
