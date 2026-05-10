@@ -52,7 +52,7 @@ requirements.txt
 - `SMTP_PORT`（例如 `587`）
 - `SMTP_USERNAME`（发件邮箱）
 - `SMTP_PASSWORD`（邮箱密码或 App Password）
-- `EMAIL_TO`（默认可设为 `ycydean@gmail.com`）
+- `EMAIL_TO`（默认可设为 `xxx@gmail.com`）
 - `EMAIL_FROM`（通常与 `SMTP_USERNAME` 相同）
 
 可选（启用 LLM 摘要）：
@@ -74,7 +74,7 @@ export SMTP_HOST=smtp.gmail.com
 export SMTP_PORT=587
 export SMTP_USERNAME=your_email@gmail.com
 export SMTP_PASSWORD=your_app_password
-export EMAIL_TO=ycydean@gmail.com
+export EMAIL_TO=xxx@gmail.com
 export EMAIL_FROM=your_email@gmail.com
 
 python -m src.main
