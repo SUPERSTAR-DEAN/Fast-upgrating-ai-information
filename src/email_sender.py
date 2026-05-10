@@ -29,8 +29,10 @@ def _mask_email(address: str) -> str:
     local_part, separator, domain = address.partition("@")
     if not separator:
         return "***"
-    if len(local_part) <= 2:
-        return f"{local_part[0]}***@{domain}" if local_part else f"***@{domain}"
+    if len(local_part) <= 1:
+        return f"***@{domain}"
+    if len(local_part) == 2:
+        return f"{local_part[0]}***@{domain}"
     return f"{local_part[:2]}***@{domain}"
 
 

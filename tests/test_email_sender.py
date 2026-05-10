@@ -1,5 +1,6 @@
 import smtplib
 import unittest
+from dataclasses import replace
 from unittest.mock import MagicMock, call, patch, sentinel
 
 from src.config import SMTPConfig
@@ -21,7 +22,7 @@ class EmailSenderTests(unittest.TestCase):
     @patch("src.email_sender.ssl.create_default_context", return_value=sentinel.context)
     @patch("src.email_sender.smtplib.SMTP_SSL")
     def test_send_email_uses_smtp_ssl_for_port_465(self, smtp_ssl, create_context, preflight_dns):
-        cfg = SMTPConfig(**{**self.base_cfg.__dict__, "port": 465})
+        cfg = replace(self.base_cfg, port=465)
         server = MagicMock()
         smtp_ssl.return_value.__enter__.return_value = server
 
