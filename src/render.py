@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -45,7 +45,7 @@ def render_email(
         "grouped": grouped,
         "learning_directions": learning_directions,
         "failed_sources": failed_sources,
-        "generated_at": datetime.utcnow(),
+        "generated_at": datetime.now(timezone.utc),
         "subject": build_subject(start, end),
     }
 

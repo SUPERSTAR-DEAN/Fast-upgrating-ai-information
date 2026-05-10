@@ -1,4 +1,4 @@
-# Fast-upgrating-ai-information
+# Fast-upgrading-ai-information
 
 每周自动汇总中英双语 AI 资讯，并通过 SMTP 发送「AI Weekly Digest」邮件。
 
