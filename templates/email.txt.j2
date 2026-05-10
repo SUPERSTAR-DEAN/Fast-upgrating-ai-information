@@ -1,0 +1,42 @@
+{{ subject }}
+Generated at {{ generated_at }} UTC
+
+目录 / Table of Contents
+1) 每周 AI 时讯 / Weekly AI News
+2) 深度学习/神经网络学习方向 / Learning Directions
+3) 抓取失败来源 / Failed Sources
+
+==== 每周 AI 时讯（{{ start.strftime('%Y-%m-%d') }} ~ {{ end.strftime('%Y-%m-%d') }}） ====
+{% if grouped %}
+{% for category, category_items in grouped.items() %}
+[{{ category }}] ({{ category_items|length }})
+{% for item in category_items %}
+- {{ item.title }}
+  来源: {{ item.source_name }}
+  时间: {{ item.published_at.strftime('%Y-%m-%d %H:%M UTC') if item.published_at else 'N/A' }}
+  摘要: {{ item.summary }}
+  链接: {{ item.url }}
+{% endfor %}
+
+{% endfor %}
+{% else %}
+本周未抓取到有效内容，请检查来源配置或网络状态。
+{% endif %}
+
+==== 本周主流深度学习与神经网络学习方向 ====
+{% for section in learning_directions %}
+[{{ section.title }}]
+{% for bullet in section.bullets %}
+- {{ bullet }}
+{% endfor %}
+
+{% endfor %}
+
+==== 抓取失败来源 ====
+{% if failed_sources %}
+{% for source in failed_sources %}
+- {{ source }}
+{% endfor %}
+{% else %}
+- 无（全部来源抓取成功）
+{% endif %}

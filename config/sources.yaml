@@ -1,0 +1,64 @@
+# Source configuration for weekly AI digest.
+# type: rss | github_trending | html_list
+sources:
+  - name: OpenAI Blog
+    category: OpenAI
+    type: rss
+    url: https://openai.com/news/rss.xml
+
+  - name: Google DeepMind Blog
+    category: Google DeepMind
+    type: rss
+    url: https://deepmind.google/blog/rss.xml
+
+  - name: Meta AI Blog
+    category: Meta AI
+    type: rss
+    url: https://ai.meta.com/blog/rss/
+
+  - name: arXiv cs.AI
+    category: arXiv
+    type: rss
+    url: https://rss.arxiv.org/rss/cs.AI
+
+  - name: arXiv cs.LG
+    category: arXiv
+    type: rss
+    url: https://rss.arxiv.org/rss/cs.LG
+
+  - name: arXiv cs.CL
+    category: arXiv
+    type: rss
+    url: https://rss.arxiv.org/rss/cs.CL
+
+  - name: Hugging Face Blog
+    category: Hugging Face
+    type: rss
+    url: https://huggingface.co/blog/feed.xml
+
+  - name: GitHub Trending AI/ML
+    category: GitHub Trending
+    type: github_trending
+    url: https://github.com/trending
+
+  - name: Reddit r/MachineLearning
+    category: Reddit
+    type: rss
+    url: https://www.reddit.com/r/MachineLearning/.rss
+
+  - name: Reddit r/LocalLLaMA
+    category: Reddit
+    type: rss
+    url: https://www.reddit.com/r/LocalLLaMA/.rss
+
+  - name: 机器之心
+    category: 国内媒体
+    type: rss
+    url: https://www.jiqizhixin.com/rss
+
+  - name: 量子位
+    category: 国内媒体
+    type: html_list
+    url: https://www.qbitai.com
+    selectors:
+      item: article a, h2 a, h3 a
