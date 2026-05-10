@@ -49,7 +49,7 @@ requirements.txt
 在仓库 `Settings -> Secrets and variables -> Actions` 中添加：
 
 - `SMTP_HOST`（例如 `smtp.gmail.com`）
-- `SMTP_PORT`（例如 `587`）
+- `SMTP_PORT`（例如 `587`；若使用 `465`，程序会自动切换为 `SMTP_SSL`）
 - `SMTP_USERNAME`（发件邮箱）
 - `SMTP_PASSWORD`（邮箱密码或 App Password）
 - `EMAIL_TO`（默认可设为 `xxx@gmail.com`）
@@ -61,7 +61,7 @@ requirements.txt
 - `LLM_API_URL`
 - `LLM_API_KEY`
 
-> Gmail 建议使用 **App Password**（开启 2FA 后创建），不要使用账户登录密码。
+> Gmail 建议使用 **App Password**（开启 2FA 后创建），不要使用账户登录密码。端口 `587` 会走 `STARTTLS`，端口 `465` 会走 `SMTP_SSL`。
 
 ## 本地运行
 
